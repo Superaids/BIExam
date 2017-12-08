@@ -32,8 +32,10 @@ def get_start_time():
         else:
             return time_only_split[0]
 
+        #Kunne ikke få DateParser til at virke,
+        #så lavede en kregler løsning for at komme uden om.
         #date_parsed = dateparser.parse(date_time_string)
-       # print(date_parsed)
+        #print(date_parsed)
 
 def start_time_to_float(time):
     to_float = float(time)
