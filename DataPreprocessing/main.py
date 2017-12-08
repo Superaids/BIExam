@@ -1,5 +1,11 @@
 import pandas as p
+import re
 import dateparser
+
+
+# 11:42 - Har lige set at jeg ikke selv skulle lave
+# "get_start_time" og "start_time_to_float" funktioner...
+# Men det har jeg altså gjort, og spildt tid på det...
 
 def get_start_time():
 
@@ -32,11 +38,6 @@ def get_start_time():
         else:
             return time_only_split[0]
 
-        #Kunne ikke få DateParser til at virke,
-        #så lavede en kregler løsning for at komme uden om.
-        #date_parsed = dateparser.parse(date_time_string)
-        #print(date_parsed)
-
 def start_time_to_float(time):
     to_float = float(time)
     print(to_float)
@@ -46,4 +47,19 @@ def start_time_to_float(time):
 test = get_start_time()
 print(test)
 start_time_to_float(test)
+
+def get_price(price_str):
+    price_regexp = r"(?P<price>\d+)"
+    if 'Free admission' in price_str:
+        price = 0
+    elif 'ratis' in price_str:
+      price = 0
+    else:
+      m = re.search(price_regexp, price_str)
+    try:
+      price = int(m.group('price'))
+    except:
+      price = None
+    return price
+
 
