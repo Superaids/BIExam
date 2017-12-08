@@ -1,4 +1,5 @@
 import pandas as p
+import dateparser
 
 def get_start_time():
 
@@ -9,19 +10,38 @@ def get_start_time():
     date_column_only = csv.iloc[:, 2]
 
     for x in date_column_only:
+        date_time_string = ""
         for temp in x:
+            date_time_string = date_time_string + temp
             print(temp)
-        split_on_comma = x.split()
-        print("ass")
-        for ass in split_on_comma:
-            print(ass)
-        split_on_spaces = split_on_comma.split()
-        start_time = split_on_spaces[0]
 
-        print(start_time)
+        print(date_time_string)
 
-        return start_time
+        split_on_comma = date_time_string.split(",")
+
+        time_only = split_on_comma[1]
+
+        time_only_split = time_only.split()
+
+        print(time_only_split[1].replace(".", ""))
+        if time_only_split[1].replace(".", "") == "pm":
+            print(time_only_split[1])
+            time = int(time_only_split[0]) + 12
+            print(time*100)
+            return time
+        else:
+            return time_only_split[0]
+
+        #date_parsed = dateparser.parse(date_time_string)
+       # print(date_parsed)
+
+def start_time_to_float(time):
+    to_float = float(time)
+    print(to_float)
+    return to_float
 
 
 test = get_start_time()
 print(test)
+start_time_to_float(test)
+
